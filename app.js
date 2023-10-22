@@ -1,20 +1,19 @@
-const express = require("express");
-const app = express();
+// const express = require("express");
+// const app = express();
+const http = require('http');
 const fs = require('fs');
-
-let writeableStream = fs.createWriteStream('hello.txt');
-writeableStream.write('Привет мир!!!');
-writeableStream.write('Продолжение записи /n');
-writeableStream.end('завершение записи');
-let readableStream = fs.createReadStream('hello.txt', 'utf-8');
-
-readableStream.on('data' , function (chunk) {
-    console.log(chunk);
-})
-
-const USERS = [{"classes": 11, "from": "Uzda", "name": "Gregori"}];
-app.get("/classes", (req, res) =>
-    res.send(USERS)
-);
-app.listen(3000);
+http.createServer((request, response) => {
+        console.log(`Запрошенный адрес ${request.url}`)
+        const filePath = request.url.substring(1);
+        fs.readFile(filePath, (err, data) =>{
+                if(err) {
+                        response.statusCode = 404;
+                        response.end('Not found resourse');
+                }
+                else{
+                        response.end(data);
+                }
+        })
+    }
+).listen(3000);
 
