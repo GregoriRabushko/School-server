@@ -5,6 +5,20 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>Home</h1>
+    <form method="post">
+        <label>как тебя зовут</label>
+        <input type="text" name="userName"><br><br>
+        <label>сколько лет</label>
+        <input type="number" name="userAge"><br><br>
+        <input type="submit" value="отправить">
+    </form>
 </body>
+<script>
+    sendUser();
+    async function sendUser() {
+        const response = await fetch("/user", { method: "POST", body: "Tom Smith"});
+        const responseText = await response.text();
+        console.log(responseText.toString());
+    }
+</script>
 </html>
