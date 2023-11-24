@@ -1,0 +1,10 @@
+--
+--
+-- CREATE TABLE Users
+-- (
+--     Id INT,
+--     Age INT,
+--     FirstName VARCHAR(20),
+--     LastName VARCHAR(20)
+-- );
+-- INSERT INTO Users(id, age, firstname, lastname) VALUES ('12', '32', 'Gregory', 'Rabushko');

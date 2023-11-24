@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  api:
+    container_name: school-server-api
+    build:
+      dockerfile: Dockerfile-dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/api/src
+    command: npm run dev
+    depends_on:
+      - db
+  db:
+    image: mysql:8.2.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: p@sSw0rd
+      MYSQL_DATABASE: school_db
+      MYSQL_USER: gregory
+      MYSQL_PASSWORD: 1234567890
+    volumes:
+      - ./db/mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+  phpmyadmin:
+    image: phpmyadmin:5.2.1-apache
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - 5000:80
