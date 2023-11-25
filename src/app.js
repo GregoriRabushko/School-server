@@ -139,7 +139,7 @@ app.get("/student/:id", jsonParser, async (request, response) => {
 //     }
 // });
 
-app.post("/selectList", jsonParser, (req, res) => {
+app.post("/addList", jsonParser, (req, res) => {
     if (!req.body) {
         return res.sendStatus(400);
     }else{
